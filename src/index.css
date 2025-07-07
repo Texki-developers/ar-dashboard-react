@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap");
+@import "tailwindcss";
+
+@theme {
+    --border-color: #333333;
+    --label-color: #333333;
+    --text-color: #00000;
+    --white-bg: #ffffff;
+    --black-bg: #000000;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+.primary-gradient {
+    background: linear-gradient(to right, #010101 0%, #3d3d3e 33%, #020202 100%);
+}
