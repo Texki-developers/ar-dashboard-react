@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IFormState {
-  [key: string]: string | number | boolean;
+  [key: string]: string | number | boolean | any;
 }
 export interface IErrorState {
   [key: string]: string;

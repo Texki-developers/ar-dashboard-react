@@ -19,7 +19,6 @@ const FormRender = ({ config }: { config: IFormConfig }) => {
         if (currentButton?.actions) {
             for (const action of currentButton.actions) {
                 if (actions({ formData, dispatch, action, config, errorDispatch, setButtonsLoading })) {
-                    console.log("entering...");
                     return;
                 }
             }

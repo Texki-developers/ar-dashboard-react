@@ -35,11 +35,7 @@ export interface GlobalAction {
 export interface Actions {
   type: ActionType;
   buttonId?: string;
-  condition?: {
-    field: string;
-    operator: "equals" | "not_equals" | "exists" | "not_exists" | "contains";
-    value: string;
-  };
+  condition?: ICondition;
   payload?: {
     field?: string;
     message?: string;
@@ -54,6 +50,12 @@ export interface Actions {
   };
   trueActions?: Actions[];
   falseActions?: Actions[];
+}
+
+export interface ICondition {
+  field: string;
+  operator: "equals" | "not_equals" | "exists" | "not_exists" | "contains";
+  value?: string | boolean | number;
 }
 
 type ActionType =
@@ -74,7 +76,8 @@ type ActionType =
   | "show_message"
   | "conditional"
   | "validate_form"
-  | "submit_form";
+  | "submit_form"
+  | "return_function";
 
 export interface IButton {
   id: string;

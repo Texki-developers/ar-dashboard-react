@@ -27,7 +27,20 @@ export const loginConfig: IFormConfig = {
             id: "login",
             label: "Login",
             type: "primaryButton",
-            actions: [{ type: "validate_form" }, { type: "set_button_loading", buttonId: "login" }],
+            actions: [
+                {
+                    type: "validate_form",
+                },
+                {
+                    type: "conditional",
+                    condition: {
+                        field: "email",
+                        operator: "equals",
+                        value: "manshad@gmail.com",
+                    },
+                    trueActions: [{ type: "set_button_loading", buttonId: "login" }],
+                },
+            ],
         },
     ],
 };
