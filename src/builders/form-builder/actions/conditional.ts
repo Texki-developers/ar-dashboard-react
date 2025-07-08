@@ -1,7 +1,7 @@
-import { actions, type IActionProps } from "../actionBuilder";
 import { evaluateCondition } from "../condition/evaluateConditions";
+import type { IActionProps } from "../useActionBuilder";
 
-export const conditionalAction = (actionProps: IActionProps) => {
+export const conditionalAction = (actionProps: IActionProps, actions: (actionProps: IActionProps) => Promise<boolean>) => {
   const { action, formData } = actionProps;
   if (action.condition) {
     if (evaluateCondition(action?.condition, formData)) {

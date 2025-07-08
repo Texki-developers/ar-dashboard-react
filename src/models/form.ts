@@ -37,16 +37,18 @@ export interface Actions {
   buttonId?: string;
   condition?: ICondition;
   payload?: {
-    field?: string;
-    message?: string;
     type?: "success" | "error" | "redirect";
     duration?: number;
-    apiUrl?: string;
+    apiEndpoint?: string;
+    apiMethod?: ApiMethod;
     urlParams?: { [key: string]: string };
     responseMapping?: { [key: string]: string };
     onSuccess?: Actions[];
     onError?: Actions[];
     placeholder?: string;
+    apiSuccessMessage?: string;
+    apiErrorMessage?: string;
+    url?: string;
   };
   trueActions?: Actions[];
   falseActions?: Actions[];
@@ -57,6 +59,8 @@ export interface ICondition {
   operator: "equals" | "not_equals" | "exists" | "not_exists" | "contains";
   value?: string | boolean | number;
 }
+
+type ApiMethod = "GET" | "POST" | "PUT" | "DELETE";
 
 type ActionType =
   | "set_field_value"
@@ -77,7 +81,8 @@ type ActionType =
   | "conditional"
   | "validate_form"
   | "submit_form"
-  | "return_function";
+  | "return_function"
+  | "navigate";
 
 export interface IButton {
   id: string;

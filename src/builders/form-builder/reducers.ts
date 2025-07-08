@@ -47,7 +47,9 @@ export const errorReducer = (state: IErrorState, action: IErrorAction) => {
 export const buttonLoadingReducer = (state: IButtonLoadingState, action: IButtonLoadingAction) => {
   switch (action.type) {
     case "SET_BUTTON_LOADING":
-      return { ...state, [action.id]: action.value };
+      return { ...state, [action.id]: action.value ?? true };
+    case "REMOVE_BUTTON_LOADING":
+      return { ...state, [action.id]: action.value ?? false };
     default:
       return state;
   }

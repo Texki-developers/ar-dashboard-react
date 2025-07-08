@@ -31,14 +31,29 @@ export const loginConfig: IFormConfig = {
                 {
                     type: "validate_form",
                 },
+                // {
+                //     type: "conditional",
+                //     condition: {
+                //         field: "email",
+                //         operator: "equals",
+                //         value: "manshad@gmail.com",
+                //     },
+                //     trueActions: [{ type: "set_button_loading", buttonId: "login" }],
+                // },
                 {
-                    type: "conditional",
-                    condition: {
-                        field: "email",
-                        operator: "equals",
-                        value: "manshad@gmail.com",
+                    type: "submit_form",
+                    payload: {
+                        apiEndpoint: "https://menu.hackphiles.in/api/v1/auth/login",
+                        apiMethod: "POST",
+                        apiSuccessMessage: "Login successful",
+                        apiErrorMessage: "Login failed",
                     },
-                    trueActions: [{ type: "set_button_loading", buttonId: "login" }],
+                },
+                {
+                    type: "navigate",
+                    payload: {
+                        url: "/",
+                    },
                 },
             ],
         },
