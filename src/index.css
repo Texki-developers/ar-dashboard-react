@@ -8,7 +8,9 @@
     --white-bg: #ffffff;
     --black-bg: #000000;
     --color-dashboard: #f6f6f7;
-    --color-grayText: #9197B3;
+    --color-grayText: #9197b3;
+    --color-borderLightGray: #eeeeee;
+    --color-tableBg: #f9fbff;
 }
 
 body {
