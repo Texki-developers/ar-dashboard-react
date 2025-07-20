@@ -4,8 +4,8 @@ import { dummyData, productTableColumn } from "./products-table.config";
 
 const Products = () => {
     return (
-        <div className="p-6 grid gap-3">
-            <TableHeader />
+        <div className="grid gap-3">
+            <TableHeader headerConfig={{ title: "Products" }} />
             <Table
                 data={dummyData}
                 columns={productTableColumn}

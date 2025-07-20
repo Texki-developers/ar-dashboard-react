@@ -1,4 +1,4 @@
-import SearchIcon from "../../assets/svg-icons";
+import { SearchIcon } from "../../assets/svg-icons";
 import Input from "../form-components/Input";
 
 const SearchInput = () => {

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import Box from "../../components/box/Box";
 import type { ITableColumn } from "../../models/table-column";
 import RenderCell from "./renderCell";
 
@@ -9,7 +10,7 @@ export interface ITableProps {
 
 const Table = ({ columns, data }: ITableProps) => {
     return (
-        <div className="bg-white py-3  rounded-xl">
+        <Box>
             <table className="w-full overflow-auto">
                 <thead className="border-b border-b-borderLightGray ">
                     <tr>
@@ -40,7 +41,7 @@ const Table = ({ columns, data }: ITableProps) => {
                     })}
                 </tbody>
             </table>
-        </div>
+        </Box>
     );
 };
 

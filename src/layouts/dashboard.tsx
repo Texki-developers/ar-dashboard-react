@@ -7,7 +7,7 @@ const DashboardLayout = () => {
         <AppLayout>
             <div className="grid grid-cols-[250px_1fr] h-screen w-screen">
                 <SideMenu />
-                <div className=" h-full w-full">
+                <div className=" h-full w-full p-4">
                     <Outlet />
                 </div>
             </div>

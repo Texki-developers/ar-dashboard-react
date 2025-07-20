@@ -5,8 +5,8 @@ import DashboardLayout from "../layouts/dashboard";
 const Dashboard = lazy(() => import("../pages/dashboard/Dashboard"));
 const Products = lazy(() => import("../pages/products/Products"));
 const Models = lazy(() => import("../pages/models/Models"));
-
 const Login = lazy(() => import("../pages/login/Login"));
+const FileScreen = lazy(() => import("../pages/fileScreen/FileScreen"));
 
 export const routerConfig = [
     {
@@ -28,6 +28,10 @@ export const routerConfig = [
             {
                 path: RouteURLs.Models,
                 element: <Models />,
+            },
+            {
+                path: `${RouteURLs.Models}/:id`,
+                element: <FileScreen />,
             },
         ],
     },
