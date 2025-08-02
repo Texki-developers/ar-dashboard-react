@@ -1,10 +1,16 @@
 import Profile from "./components/profile";
 import { sideMenuConfig } from "./sideMenu.config";
+import { useCallback } from "react";
 import { useLocation, useNavigate } from "react-router";
 
 const SideMenu = () => {
     const navigate = useNavigate();
     const selectedMenu = useLocation().pathname;
+
+    const isActive = useCallback((path: string) => {
+        const firstPath = selectedMenu.split("/")[1];
+        return firstPath === path;
+    }, [selectedMenu]);
 
     return (
         <div className="bg-white w-[250px] h-full px-4 py-6">
@@ -25,9 +31,9 @@ const SideMenu = () => {
                                 onClick={() => {
                                     navigate(item.path);
                                 }}
-                                className={`flex items-center gap-2 ${selectedMenu === item.path ? "primary-gradient text-white" : "text-grayText"
+                                className={`flex items-center gap-2 ${isActive(item.path) ? "primary-gradient text-white" : "text-grayText"
                                     } rounded-md p-2 cursor-pointer text-sm `}>
-                                {item.icon({ color: selectedMenu === item.path ? "white" : "#9197B3" })}
+                                {item.icon({ color: isActive(item.path) ? "white" : "#9197B3" })}
                                 <h1>{item.name}</h1>
                             </div>
                         ))}

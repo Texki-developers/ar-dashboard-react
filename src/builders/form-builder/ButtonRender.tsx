@@ -11,9 +11,12 @@ const ButtonRender = ({ buttons, onClick, buttonsLoading }: { buttons: IButton[]
                         return (
                             <PrimaryButton
                                 key={button.id}
-                                type="button" 
+                                type="button"
                                 loading={buttonsLoading[button.id]}
-                                onClick={() => onClick(button.id)}>
+                                onClick={() => {
+                                    if (buttonsLoading[button.id]) return;
+                                    onClick(button.id)
+                                }}>
                                 {button.label}
                             </PrimaryButton>
                         );

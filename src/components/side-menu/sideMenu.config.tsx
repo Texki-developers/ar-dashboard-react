@@ -4,16 +4,16 @@ export const sideMenuConfig = [
     {
         name: "Dashboard",
         icon: DashboardIcon,
-        path: "/",
+        path: "",
     },
     {
         name: "Products",
         icon: ProductsIcon,
-        path: "/products",
+        path: "products",
     },
     {
         name: "Models",
         icon: ModelsIcon,
-        path: "/models",
+        path: "models",
     },
 ];

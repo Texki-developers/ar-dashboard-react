@@ -1,8 +1,18 @@
 import AppLayout from "../../layouts/AppLayout";
 import FormRender from "../../builders/form-builder/FormRender";
 import { loginConfig } from "./login.config";
+import { authStore } from "../../store/auth.store";
+import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { token } = authStore();
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token, navigate]);
   return (
     <AppLayout>
       <div className="flex justify-end items-center h-full w-full pr-[10%]">

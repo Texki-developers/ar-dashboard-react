@@ -28,7 +28,6 @@ const useActionBuilder = () => {
                 if (action.buttonId) setButtonsLoading({ type: "SET_BUTTON_LOADING", id: action.buttonId, value: true });
                 return false;
             case "submit_form":
-                console.log({ action });
                 return await submitForm({ action, formData, setButtonsLoading, buttonId });
             case "navigate":
                 if (action.payload?.url) {

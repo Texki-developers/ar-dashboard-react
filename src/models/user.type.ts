@@ -1,0 +1,6 @@
+export enum EUserRole {
+  MAINTAINER = "MAINTAINER",
+  ADMIN = "ADMIN",
+  SUPER_ADMIN = "SUPER_ADMIN",
+  REGULAR = "REGULAR",
+}

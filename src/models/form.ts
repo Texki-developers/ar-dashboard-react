@@ -49,6 +49,7 @@ export interface Actions {
     apiSuccessMessage?: string;
     apiErrorMessage?: string;
     url?: string;
+    isLogin?: boolean;
   };
   trueActions?: Actions[];
   falseActions?: Actions[];
