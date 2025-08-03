@@ -7,6 +7,8 @@ import Loader from "../../components/loader/Loader";
 import Empty from "../../components/empty/Empty";
 import ModalWrapper from "../../components/modal/ModalWrapper";
 import { useState } from "react";
+import ModelViewer from "./components/ModelViewer";
+import { CloseIcon } from "../../assets/svg-icons";
 
 const FileScreen = () => {
     const [showModal, setShowModal] = useState(false);
@@ -28,17 +30,27 @@ const FileScreen = () => {
                             <File
                                 key={`file-${file._id}`}
                                 name={file.file_name}
-                                model={file.usdz_file}
+                                model={file.glb_file}
                                 onClick={() => setShowModal(true)}
                             />
                         ))}
                     </div>
                 )}
             </Box>
-            <ModalWrapper
-                show={showModal}
-                onClose={() => setShowModal(false)}
-            />
+            {files?.data?.[0]?.glb_file && (
+                <ModalWrapper
+                    show={showModal}
+                    onClose={() => setShowModal(false)}
+                >
+                    <div className="flex justify-between">
+                        <h5 className="text-[24px] font-semibold">{files?.data?.[0]?.file_name}</h5>
+                        <button className="cursor-pointer" onClick={() => setShowModal(false)}>
+                            <CloseIcon width="18" height="18" />
+                        </button>
+                    </div>
+                    <ModelViewer src={import.meta.env.VITE_FILE_URL + files?.data?.[0]?.glb_file} />
+                </ModalWrapper>
+            )}
         </div>
     );
 };
