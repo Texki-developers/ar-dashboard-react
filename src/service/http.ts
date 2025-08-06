@@ -21,6 +21,13 @@ class Http {
       headers: this.getHeaders(),
     });
   }
+
+  static async delete<T>(url: string, data?: T) {
+    return api.delete<T>(url, {
+      headers: this.getHeaders(),
+      data,
+    });
+  }
 }
 
 export default Http;

@@ -1,11 +1,14 @@
 import { FileIcon } from "../../assets/svg-icons";
+import FolderRemoveIcon from "../folder-remove-icon/folder-remove-icon";
 
-const File = ({ name, model, onClick }: { name: string; model: string; onClick: () => void }) => {
-    console.log(import.meta.env.VITE_FILE_URL + model);
+const File = ({ name, onClick, onFileRemove }: { name: string; model: string; onClick: () => void; onFileRemove: () => void }) => {
     return (
         <div
             onClick={onClick}
-            className="grid gap-2 cursor-pointer justify-items-center hover:scale-105 transition-all">
+            className="grid relative gap-2 group cursor-pointer justify-items-center hover:scale-105 transition-all">
+            <div className="absolute hidden left-[15%] -top-2 w-full h-full group-hover:block">
+                <FolderRemoveIcon onClick={onFileRemove} />
+            </div>
             <FileIcon />
             <h5 className="leading-none text-center">{name}</h5>
         </div>
