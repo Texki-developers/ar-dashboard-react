@@ -1,7 +1,8 @@
+import Button from "../../components/button/Button";
 import SearchInput from "../../components/search-input/SearchInput";
 import type { IHeaderConfig } from "../../models/header.type";
 
-const TableHeader = ({ headerConfig }: { headerConfig: IHeaderConfig }) => {
+const TableHeader = ({ headerConfig, actionButton }: { headerConfig: IHeaderConfig; actionButton?: { label: string; onClick: () => void } }) => {
     return (
         <div className="px-6 py-3 bg-white rounded-xl flex items-center gap-2 justify-between">
             <div className="flex gap-1 items-center">
@@ -10,6 +11,7 @@ const TableHeader = ({ headerConfig }: { headerConfig: IHeaderConfig }) => {
             </div>
             <div className="flex gap-2 items-center">
                 <SearchInput />
+                {actionButton && <Button onClick={actionButton.onClick}>{actionButton.label}</Button>}
             </div>
         </div>
     );

@@ -5,7 +5,6 @@ interface AvatarProps {
 
 const Avatar = ({ src, fullName }: AvatarProps) => {
     const names = fullName.split(" ");
-    console.log(names);
     return src ? (
         <img
             className="w-12 h-12 rounded-full object-cover"

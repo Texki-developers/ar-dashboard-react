@@ -5,14 +5,11 @@ import type { IFileResponseData } from "./file.type";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
+import { ModelApi } from "../../service/apis/models/model";
 
 const useFiles = () => {
   const { id } = useParams();
   const [files, setFiles] = useState<IFileResponseData[]>([]);
-  const getFiles = async () => {
-    const response = await Http.get<ApiResponse<IFileResponseData[]>>(`/file/items?folderId=${id}`);
-    return response.data;
-  };
 
   const deleteFile = async (fileId: string) => {
     try {
@@ -32,7 +29,7 @@ const useFiles = () => {
   const { data, isLoading: filesLoading } = useQuery({
     queryKey: ["files", id],
     queryFn: async () => {
-      return getFiles();
+      return ModelApi.getFiles(id!);
     },
   });
 

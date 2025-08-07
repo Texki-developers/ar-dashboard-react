@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { authStore } from "../store/auth.store";
 import { api } from "./instance";
 
@@ -19,6 +20,16 @@ class Http {
   static async post<T>(url: string, data: T) {
     return api.post<T>(url, data, {
       headers: this.getHeaders(),
+    });
+  }
+
+  static async formData<T>(url: string, data: any) {
+    const formData = new FormData();
+    Object.entries(data).forEach(([key, value]: any) => {
+      formData.append(key, value);
+    });
+    return api.post<T>(url, formData, {
+      headers: { ...this.getHeaders(), "Content-Type": "multipart/form-data" },
     });
   }
 

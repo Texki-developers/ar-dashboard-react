@@ -6,6 +6,7 @@ export interface ITableColumn {
   dateFormat?: string;
   currency?: Currency;
   actions?: Action[];
+  baseUrl?: string;
 }
 
 export type IValueType = "text" | "date" | "image" | "price" | "actions";

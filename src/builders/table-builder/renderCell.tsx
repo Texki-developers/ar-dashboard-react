@@ -9,19 +9,19 @@ interface IRenderCellProps {
 const RenderCell = ({ column, item }: IRenderCellProps) => {
     const getData = (key: string, item: any) => {
         const value = key.split(".").reduce((acc: any, curr: string) => acc?.[curr], item);
-        return typeof value === "string" ? value : "";
+        return value;
     };
     const value = getData(column.sourceKey, item);
     switch (column.type) {
         case "text":
             return value;
         case "date":
-            return <div className="whitespace-nowrap">{moment(value).format(column.dateFormat || "dd-mm-yyy")}</div>;
+            return <div className="whitespace-nowrap">{value ? moment(value).format(column.dateFormat || "dd-mm-yyy") : ""}</div>;
         case "image":
             return (
                 <img
                     className="object-cover w-[80px] h-[50px] rounded-md"
-                    src={value}
+                    src={column.baseUrl + value}
                     alt={"No Image"}
                 />
             );
