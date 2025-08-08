@@ -4,11 +4,13 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLTe
     leftIcon?: React.ReactNode;
     rightIcon?: React.ReactNode;
     isTextArea?: boolean;
+    width?: string;
 }
 
 const Input = (props: InputProps) => {
+    console.log(props)
     return (
-        <div className="py-2 w-[250px]">
+        <div style={{ width: props.width ?? "250px" }} className="py-2">
             {props.label && (
                 <label
                     htmlFor={props.name}
@@ -30,6 +32,7 @@ const Input = (props: InputProps) => {
                     <input
                         id={props.name}
                         {...props}
+                        autoComplete="off"
                         className={`h-[40px] w-[250px] outline-0 text-[16px] placeholder:text-gray-400  p-2 ${props.className}`}
                     />
                 )}

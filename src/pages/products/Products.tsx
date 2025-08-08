@@ -13,31 +13,34 @@ const Products = () => {
     const { products, productsLoading } = useProducts();
     const [showModal, setShowModal] = useState(false);
     return (
-        <div className="grid gap-3">
-            <TableHeader
-                headerConfig={{ title: "Products" }}
-                actionButton={{
-                    label: "Add Product",
-                    onClick: () => setShowModal(true),
-                }}
-            />
-            {productsLoading ? (
-                <Loader />
-            ) : (
-                products?.data && (
-                    <Table
-                        data={products?.data}
-                        columns={productTableColumn}
-                        onRowClick={(item) => {
-                            navigate(`${RouteURLs.Products}/${item._id}`);
-                        }}
-                    />
-                )
-            )}
-            <AddProductModal
-                show={showModal}
-                onClose={() => setShowModal(false)}
-            />
+        <div>
+            <div className="grid gap-3">
+                <TableHeader
+                    headerConfig={{ title: "Products" }}
+                    actionButton={{
+                        label: "Add Product",
+                        onClick: () => setShowModal(true),
+                    }}
+                    showSearch
+                />
+                {productsLoading ? (
+                    <Loader />
+                ) : (
+                    products?.data && (
+                        <Table
+                            data={products?.data}
+                            columns={productTableColumn}
+                            onRowClick={(item) => {
+                                navigate(`${RouteURLs.Products}/${item._id}`);
+                            }}
+                        />
+                    )
+                )}
+                <AddProductModal
+                    show={showModal}
+                    onClose={() => setShowModal(false)}
+                />
+            </div>
         </div>
     );
 };

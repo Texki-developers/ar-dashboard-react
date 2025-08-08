@@ -36,6 +36,8 @@ const FieldRender = ({
                         value={(formData?.[field.id] as any) ?? ""}
                         onChange={(e) => onChange(field.id, e?.target.value)}
                         error={errors?.[field.id]}
+                        width="350px"
+                        className="w-full!"
                     />
                 );
             case "password":
@@ -47,6 +49,8 @@ const FieldRender = ({
                         value={(formData?.[field.id] as any) ?? ""}
                         onChange={(e) => onChange(field.id, e?.target.value)}
                         error={errors?.[field.id]}
+                        width="350px"
+                        className="w-full!"
                     />
                 );
             default:

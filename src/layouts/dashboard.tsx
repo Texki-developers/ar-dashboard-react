@@ -17,7 +17,7 @@ const DashboardLayout = () => {
         <AppLayout>
             <div className="grid grid-cols-[250px_1fr] h-screen w-screen">
                 <SideMenu />
-                <div className=" h-full w-full p-4">
+                <div className=" h-full  p-4 max-w-[calc(100vw-250px)]">
                     <Outlet />
                 </div>
             </div>

@@ -7,6 +7,7 @@ const Products = lazy(() => import("../pages/products/Products"));
 const Models = lazy(() => import("../pages/models/Models"));
 const Login = lazy(() => import("../pages/login/Login"));
 const FileScreen = lazy(() => import("../pages/fileScreen/FileScreen"));
+const ProductDetails = lazy(() => import("../pages/product-details/ProductDetails"));
 
 export const routerConfig = [
     {
@@ -27,7 +28,7 @@ export const routerConfig = [
             },
             {
                 path: `${RouteURLs.Products}/:id`,
-                element: <Products />,
+                element: <ProductDetails />,
             },
             {
                 path: RouteURLs.Models,

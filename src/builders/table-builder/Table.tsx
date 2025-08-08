@@ -11,8 +11,8 @@ export interface ITableProps {
 
 const Table = ({ columns, data, onRowClick }: ITableProps) => {
     return (
-        <Box>
-            <table className="w-full overflow-auto">
+        <Box className="overflow-auto w-[calc(100vw-260px)]">
+            <table className="w-full">
                 <thead className="border-b border-b-borderLightGray ">
                     <tr>
                         {columns.map((column) => (
