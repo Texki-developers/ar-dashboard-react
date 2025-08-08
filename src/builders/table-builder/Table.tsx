@@ -6,9 +6,10 @@ import RenderCell from "./renderCell";
 export interface ITableProps {
     columns: ITableColumn[];
     data: any[];
+    onRowClick?: (item: any) => void;
 }
 
-const Table = ({ columns, data }: ITableProps) => {
+const Table = ({ columns, data, onRowClick }: ITableProps) => {
     return (
         <Box>
             <table className="w-full overflow-auto">
@@ -26,7 +27,7 @@ const Table = ({ columns, data }: ITableProps) => {
                 <tbody>
                     {data?.map((item: any, i) => {
                         return (
-                            <tr className={`${i % 2 === 1 ? "bg-tableBg" : ""}  hover:bg-gray-100`}>
+                            <tr onClick={() => onRowClick?.(item)} className={`${i % 2 === 1 ? "bg-tableBg" : ""}  hover:bg-gray-100 ${onRowClick ? "cursor-pointer" : ""}`}>
                                 {columns.map((column) => {
                                     return (
                                         <td

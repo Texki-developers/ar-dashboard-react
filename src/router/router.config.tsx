@@ -26,6 +26,10 @@ export const routerConfig = [
                 element: <Products />,
             },
             {
+                path: `${RouteURLs.Products}/:id`,
+                element: <Products />,
+            },
+            {
                 path: RouteURLs.Models,
                 element: <Models />,
             },

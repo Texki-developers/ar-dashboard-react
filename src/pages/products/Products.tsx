@@ -5,8 +5,11 @@ import { productTableColumn } from "./products-table.config";
 import { useState } from "react";
 import useProducts from "./useProducts.hook";
 import Loader from "../../components/loader/Loader";
+import { useNavigate } from "react-router";
+import { RouteURLs } from "../../router/routeUrls";
 
 const Products = () => {
+    const navigate = useNavigate();
     const { products, productsLoading } = useProducts();
     const [showModal, setShowModal] = useState(false);
     return (
@@ -25,6 +28,9 @@ const Products = () => {
                     <Table
                         data={products?.data}
                         columns={productTableColumn}
+                        onRowClick={(item) => {
+                            navigate(`${RouteURLs.Products}/${item._id}`);
+                        }}
                     />
                 )
             )}
