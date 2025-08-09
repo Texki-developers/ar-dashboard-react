@@ -8,7 +8,11 @@ export class ProductApi extends Http {
     return response.data;
   }
   static async getProducts() {
-    const response = await this.get<ApiResponse<IProduct[]>>("/product/crm/items");
+    const response = await this.get<ApiResponse<IProduct[]>>("/product/crm/items"); 
+    return response.data;
+  }
+  static async getProductById(id: string) {
+    const response = await this.get<ApiResponse<IProduct>>(`/product/items/${id}`);
     return response.data;
   }
 }
