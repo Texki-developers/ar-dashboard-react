@@ -24,7 +24,10 @@ export interface IProduct {
   three_usdz: string;
   actual_price: number;
   offer_price: number;
-  category: string;
+  category: {
+    _id: string;
+    name: string;
+  };
   food_type: string;
   recipes: string[];
   is_recommended: boolean;

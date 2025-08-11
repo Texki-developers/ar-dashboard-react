@@ -8,11 +8,15 @@ export class ProductApi extends Http {
     return response.data;
   }
   static async getProducts() {
-    const response = await this.get<ApiResponse<IProduct[]>>("/product/crm/items"); 
+    const response = await this.get<ApiResponse<IProduct[]>>("/product/crm/items");
     return response.data;
   }
   static async getProductById(id: string) {
-    const response = await this.get<ApiResponse<IProduct>>(`/product/items/${id}`);
+    const response = await this.get<ApiResponse<IProduct>>(`/product/crm/items/${id}`);
     return response.data;
   }
+  static async deleteProduct(id: string) {
+    const response = await this.delete<ApiResponse<IProduct>>(`/product/items/${id}`);
+    return response.data;
+  } 
 }

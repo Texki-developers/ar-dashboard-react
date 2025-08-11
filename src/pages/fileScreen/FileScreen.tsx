@@ -5,11 +5,9 @@ import File from "../../components/file/File";
 import useFiles from "./useFiles.hook";
 import Loader from "../../components/loader/Loader";
 import Empty from "../../components/empty/Empty";
-import ModalWrapper from "../../components/modal/ModalWrapper";
 import { useState } from "react";
-import ModelViewer from "./components/ModelViewer";
-import { CloseIcon } from "../../assets/svg-icons";
 import ConfirmPopup from "../../components/confirm-popup/ConfirmPopup";
+import ModelViewerRender from "../../components/three-model-viewer/ModelViewerRender";
 
 const FileScreen = () => {
     const [showModal, setShowModal] = useState(false);
@@ -48,22 +46,12 @@ const FileScreen = () => {
                 )}
             </Box>
             {files?.[0]?.glb_file && (
-                <ModalWrapper
+                <ModelViewerRender
                     show={showModal}
-                    onClose={() => setShowModal(false)}>
-                    <div className="flex justify-between">
-                        <h5 className="text-[24px] font-semibold">{files?.[0]?.file_name}</h5>
-                        <button
-                            className="cursor-pointer"
-                            onClick={() => setShowModal(false)}>
-                            <CloseIcon
-                                width="18"
-                                height="18"
-                            />
-                        </button>
-                    </div>
-                    <ModelViewer src={import.meta.env.VITE_FILE_URL + files?.[0]?.glb_file} />
-                </ModalWrapper>
+                    onClose={() => setShowModal(false)}
+                    name={files?.[0]?.file_name}
+                    src={files?.[0]?.glb_file}
+                />
             )}
             <ConfirmPopup
                 show={!!showConfirmPopup && !!deleteFileId}
