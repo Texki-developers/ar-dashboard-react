@@ -18,6 +18,7 @@ const ImageViewer = ({ url, onClose }: { url: string; onClose: () => void }) => 
             <img
                 className="w-full max-w-[min(80vw, 800px)] max-h-[min(80vh, 800px)] h-full object-cover rounded-md"
                 src={url}
+                style={{ maxWidth: "min(80vw, 800px)", maxHeight: "min(80vh, 800px)" }}
                 alt=""
             />
         </ModalWrapper>
