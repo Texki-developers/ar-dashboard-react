@@ -24,6 +24,7 @@ const AddProductModal = ({ onClose, show, isEdit, product }: { onClose: () => vo
             reset(prefillData);
         }
     }, [prefillData, reset, isEdit]);
+
     const onSubmit = (data: IAddProductModal) => {
         console.log({ data });
         if (isEdit) {
@@ -39,7 +40,7 @@ const AddProductModal = ({ onClose, show, isEdit, product }: { onClose: () => vo
             onClose={onClose}>
             <div className="min-w-[300px]">
                 <div className="flex justify-between items-center py-4">
-                    <h2 className="text-lg font-semibold">Add Product</h2>
+                    <h2 className="text-lg font-semibold">{isEdit ? "Edit" : "Add"} Product</h2>
                     <div
                         className="cursor-pointer"
                         onClick={onClose}>
@@ -74,7 +75,7 @@ const AddProductModal = ({ onClose, show, isEdit, product }: { onClose: () => vo
                         errors={errors}
                     />
                     <div className="flex justify-end">
-                        <Button onClick={handleSubmit(onSubmit)}>Submit</Button>
+                        <Button onClick={handleSubmit(onSubmit)}>{isEdit ? "Update" : "Submit"}</Button>
                     </div>
                 </div>
             </div>

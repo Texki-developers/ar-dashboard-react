@@ -72,7 +72,6 @@ const useAddProduct = (product?: IProduct) => {
 
   const onAddProductSubmit = async (data: IAddProductModal, onClose: () => void, reset: () => void) => {
     try {
-      console.log({ data });
       const body: IProductApiBody = {
         ...data,
         category: data.category.value,
