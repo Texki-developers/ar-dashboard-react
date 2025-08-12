@@ -28,6 +28,14 @@ export interface IProduct {
     _id: string;
     name: string;
   };
+  file_id: {
+    _id: string;
+    file_name: string;
+    folder_id: {
+      _id: string;
+      folder_name: string;
+    };
+  };
   food_type: string;
   recipes: string[];
   is_recommended: boolean;

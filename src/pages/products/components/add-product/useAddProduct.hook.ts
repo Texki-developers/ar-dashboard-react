@@ -2,15 +2,16 @@
 import { CategoryApi } from "../../../../service/apis/category/category";
 import { ModelApi } from "../../../../service/apis/models/model";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProductApi } from "../../../../service/apis/product/Product";
 import { toast } from "react-toastify";
 import type { IAddProductModal } from "./AddProductModal";
-import type { IProductApiBody } from "../../../../service/apis/product/product.type";
+import type { IProduct, IProductApiBody } from "../../../../service/apis/product/product.type";
 import { queryClient } from "../../../../main";
 
-const useAddProduct = () => {
+const useAddProduct = (product?: IProduct) => {
   const [folderId, setFolderId] = useState<string | undefined>(undefined);
+  const [prefillData, setPrefillData] = useState<IAddProductModal | undefined>(undefined);
 
   const { data: categories, isLoading: categoriesLoading } = useQuery({
     queryKey: ["categories"],
@@ -28,7 +29,48 @@ const useAddProduct = () => {
     enabled: !!folderId,
   });
 
-  const onAddProductSubmit = async (data: IAddProductModal, onClose: () => void) => {
+  useEffect(() => {
+    if (product) {
+      setPrefillData({
+        name: product.name,
+        desc: product.desc,
+        category: {
+          label: product.category?.name,
+          value: product.category?._id,
+        },
+        image: import.meta.env.VITE_FILE_URL + product.image,
+        actualPrice: product.actual_price,
+        offerPrice: product.offer_price,
+        isRecommended: {
+          label: product.is_recommended ? "Yes" : "No",
+          value: product.is_recommended,
+        },
+        foodType: {
+          label: product.food_type,
+          value: product.food_type,
+        },
+        specialty: {
+          label: product.speciality,
+          value: product.speciality,
+        },
+        file: {
+          label: product.file_id.file_name,
+          value: product.file_id._id,
+        },
+        folder: {
+          label: product.file_id.folder_id.folder_name,
+          value: product.file_id.folder_id._id,
+        },
+        recipes: product.recipes.map((recipe) => ({
+          label: recipe,
+          value: recipe,
+        })),
+        youtubeEmbedLink: "",
+      });
+    }
+  }, [product]);
+
+  const onAddProductSubmit = async (data: IAddProductModal, onClose: () => void, reset: () => void) => {
     try {
       console.log({ data });
       const body: IProductApiBody = {
@@ -45,6 +87,7 @@ const useAddProduct = () => {
       if (response?.success) {
         toast.success("Product added successfully");
         onClose();
+        reset();
         queryClient.invalidateQueries({ queryKey: ["list-products"] });
       }
     } catch (error: any) {
@@ -62,6 +105,7 @@ const useAddProduct = () => {
     folderId,
     setFolderId,
     onAddProductSubmit,
+    prefillData,
   };
 };
 

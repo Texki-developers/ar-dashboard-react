@@ -8,16 +8,29 @@ import AttributeDetails from "./components/attributeDetails";
 import Reviews from "./components/reviews";
 import Button from "../../../../components/button/Button";
 import useAddProduct from "./useAddProduct.hook";
+import type { IProduct } from "../../../../service/apis/product/product.type";
+import { useEffect } from "react";
 
-const AddProductModal = ({ onClose, show }: { onClose: () => void; show: boolean }) => {
+const AddProductModal = ({ onClose, show, isEdit, product }: { onClose: () => void; show: boolean; isEdit?: boolean; product?: IProduct }) => {
     const {
         control,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm<IAddProductModal>();
-    const { categories, categoriesLoading, setFolderId, folders, foldersLoading, files, filesLoading, onAddProductSubmit } = useAddProduct();
+    const { categories, categoriesLoading, setFolderId, folders, foldersLoading, files, filesLoading, onAddProductSubmit, prefillData } = useAddProduct(product);
+    useEffect(() => {
+        if (prefillData && isEdit) {
+            reset(prefillData);
+        }
+    }, [prefillData, reset, isEdit]);
     const onSubmit = (data: IAddProductModal) => {
-        onAddProductSubmit(data,onClose);
+        console.log({ data });
+        if (isEdit) {
+            console.log(product);
+        } else {
+            onAddProductSubmit(data, onClose, reset);
+        }
     };
 
     return (
@@ -71,7 +84,6 @@ const AddProductModal = ({ onClose, show }: { onClose: () => void; show: boolean
 
 export default AddProductModal;
 
-
 export interface IAddProductModal {
     name: string;
     desc: string;
@@ -80,12 +92,12 @@ export interface IAddProductModal {
         value: string;
         isCreated?: boolean;
     };
-    image: File;
+    image: File | string;
     actualPrice: number;
     offerPrice: number;
     isRecommended: {
         label: string;
-        value: string;
+        value: boolean | string;
     };
     foodType: {
         label: string;
@@ -94,7 +106,7 @@ export interface IAddProductModal {
     specialty: {
         label: string;
         value: string;
-    }
+    };
     file: {
         label: string;
         value: string;
@@ -102,10 +114,10 @@ export interface IAddProductModal {
     folder: {
         label: string;
         value: string;
-    }
+    };
     recipes: {
         label: string;
         value: string;
-    }[]
+    }[];
     youtubeEmbedLink: string;
 }

@@ -6,8 +6,11 @@ import { productDetailsConfig } from "./product-details.config";
 import { useProductDetails } from "./useProductDetails.hook";
 import type { IProduct } from "../../service/apis/product/product.type";
 import ConfirmPopup from "../../components/confirm-popup/ConfirmPopup";
+import AddProductModal from "../products/components/add-product/AddProductModal";
+import { useState } from "react";
 
 const ProductDetails = () => {
+    const [showModal, setShowModal] = useState(false);
     const { id } = useParams<string>();
     const { product, isLoading, deleteProduct, isDeleting, showConfirmPopup, onProductRemove, setShowConfirmPopup } = useProductDetails(id!);
     console.log({ product });
@@ -24,7 +27,7 @@ const ProductDetails = () => {
                                 <DeleteIcon color="#000" />
                             </div>
                             <div
-                                onClick={() => { }}
+                                onClick={() => setShowModal(true)}
                                 className="p-2 cursor-pointer hover:bg-gray-100 rounded-md">
                                 <EditIcon color="#000" />
                             </div>
@@ -61,6 +64,15 @@ const ProductDetails = () => {
                     deleteProduct();
                 }}
             />
+            {product && (
+                <AddProductModal
+                    key={product._id}
+                    show={showModal}
+                    onClose={() => setShowModal(false)}
+                    isEdit
+                    product={product}
+                />
+            )}
         </div>
     );
 };

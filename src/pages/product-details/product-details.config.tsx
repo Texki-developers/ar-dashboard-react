@@ -49,7 +49,7 @@ export const productDetailsConfig: IProductDetailsConfig[] = [
   {
     label: "Recipes",
     sourceKey: "recipes",
-    render: (value: IProduct) => value.recipes,
+    render: (value: IProduct) => value.recipes.join(", "),
   },
   {
     label: "Youtube Embed Link",
