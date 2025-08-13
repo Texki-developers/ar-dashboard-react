@@ -44,7 +44,7 @@ const BasicDetails = ({
                             onCreateOption={(value) => {
                                 field?.onChange(value);
                             }}
-                            options={categories?.map((category: { name: string, _id: string }) => ({
+                            options={categories?.map((category) => ({
                                 label: category.name,
                                 value: category._id,
                             }))}
