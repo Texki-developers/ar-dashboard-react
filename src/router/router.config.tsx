@@ -8,7 +8,7 @@ const Models = lazy(() => import("../pages/models/Models"));
 const Login = lazy(() => import("../pages/login/Login"));
 const FileScreen = lazy(() => import("../pages/fileScreen/FileScreen"));
 const ProductDetails = lazy(() => import("../pages/product-details/ProductDetails"));
-const QrCodes = lazy(() => import("../pages/qr-codes/QrCodes"));
+const QrCodes = lazy(() => import("../pages/tables/Tables"));
 
 export const routerConfig = [
     {
@@ -40,7 +40,7 @@ export const routerConfig = [
                 element: <FileScreen />,
             },
             {
-                path: RouteURLs.QrCodes,
+                path: RouteURLs.Tables,
                 element: <QrCodes />,
             },
         ],

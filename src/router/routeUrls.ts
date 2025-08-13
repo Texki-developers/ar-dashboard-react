@@ -3,5 +3,5 @@ export enum RouteURLs {
   Home = "/",
   Products = "/products",
   Models = "/models",
-  QrCodes = "/qr-codes",
+  Tables = "/tables",
 }

@@ -1,4 +1,6 @@
-import { DashboardIcon, ModelsIcon, ProductsIcon, QrCodesIcon } from "./icons/icons";
+import { TableIcon } from "../../assets/svg-icons";
+import { RouteURLs } from "../../router/routeUrls";
+import { DashboardIcon, ModelsIcon, ProductsIcon } from "./icons/icons";
 
 export const sideMenuConfig = [
     {
@@ -9,16 +11,16 @@ export const sideMenuConfig = [
     {
         name: "Products",
         icon: ProductsIcon,
-        path: "products",
+        path: RouteURLs.Products?.replace('/', ''),
     },
     {
         name: "Models",
         icon: ModelsIcon,
-        path: "models",
+        path: RouteURLs.Models?.replace('/', ''),
     },
     {
-        name: "Qr Codes",
-        icon: QrCodesIcon,
-        path: "qr-codes",
+        name: "Tables",
+        icon: TableIcon,
+        path: RouteURLs.Tables?.replace('/', ''),
     },
 ];
