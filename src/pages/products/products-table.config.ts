@@ -53,13 +53,6 @@ export const productTableColumn: ITableColumn[] = [
     currency: "INR",
     sourceKey: "offer_price",
   },
-  {
-    key: "actions",
-    columnName: "Actions",
-    type: "actions",
-    actions: ["delete"],
-    sourceKey: "",
-  },
 ];
 
 export const dummyData = [
