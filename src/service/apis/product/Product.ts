@@ -18,5 +18,9 @@ export class ProductApi extends Http {
   static async deleteProduct(id: string) {
     const response = await this.delete<ApiResponse<IProduct>>(`/product/items/${id}`);
     return response.data;
-  } 
+  }
+  static async updateProduct(id: string, product: IProductApiBody) {
+    const response = await this.formData<ApiResponse<IProduct>>(`/product/items/update/${id}`, product, "PUT");
+    return response.data;
+  }
 }

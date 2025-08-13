@@ -1,9 +1,27 @@
 import { Controller, type Control, type FieldErrors } from "react-hook-form";
 import Input from "../../../../../components/form-components/Input";
 import type { IAddProductModal } from "../AddProductModal";
+import { useEffect, useState } from "react";
+import { extractYouTubeId } from "../../../../../utils/utils";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Reviews = ({ control, errors }: { control: Control<IAddProductModal, any, IAddProductModal>; errors: FieldErrors<IAddProductModal> }) => {
+const Reviews = ({
+    control,
+    errors,
+    watch,
+}: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    control: Control<IAddProductModal, any, IAddProductModal>;
+    errors: FieldErrors<IAddProductModal>;
+    watch: (name: string) => string;
+}) => {
+    const [embedLink, setEmbedLink] = useState<string>("");
+    const youtubeEmbedLink = watch("youtubeEmbedLink");
+    useEffect(() => {
+        const id = extractYouTubeId(youtubeEmbedLink);
+        if (id) {
+            setEmbedLink(`https://www.youtube.com/embed/${id}`);
+        }
+    }, [youtubeEmbedLink]);
     return (
         <div className="border-t border-[#0000001f] py-4">
             <h2 className="text-lg ">Reviews</h2>
@@ -20,6 +38,18 @@ const Reviews = ({ control, errors }: { control: Control<IAddProductModal, any, 
                     )}
                 />
             </div>
+            {embedLink && (
+                <div className="w-full">
+                    <iframe
+                        width="560"
+                        height="315"
+                        src={embedLink}
+                        title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                    />
+                </div>
+            )}
         </div>
     );
 };

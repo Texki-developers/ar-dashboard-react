@@ -42,4 +42,5 @@ export interface IProduct {
   speciality: string;
   __v: number;
   vendor_id: string;
+  youtube_url?: string;
 }

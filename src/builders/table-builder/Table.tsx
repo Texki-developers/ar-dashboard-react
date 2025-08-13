@@ -27,7 +27,9 @@ const Table = ({ columns, data, onRowClick }: ITableProps) => {
                 <tbody>
                     {data?.map((item: any, i) => {
                         return (
-                            <tr onClick={() => onRowClick?.(item)} className={`${i % 2 === 1 ? "bg-tableBg" : ""}  hover:bg-gray-100 ${onRowClick ? "cursor-pointer" : ""}`}>
+                            <tr
+                                onClick={() => onRowClick?.(item)}
+                                className={`${i % 2 === 1 ? "bg-tableBg" : ""}  hover:bg-gray-100 ${onRowClick ? "cursor-pointer" : ""}`}>
                                 {columns.map((column) => {
                                     return (
                                         <td
@@ -42,6 +44,7 @@ const Table = ({ columns, data, onRowClick }: ITableProps) => {
                     })}
                 </tbody>
             </table>
+            {data?.length === 0 && <div className="w-full h-full flex items-center justify-center">No data available</div>}
         </Box>
     );
 };

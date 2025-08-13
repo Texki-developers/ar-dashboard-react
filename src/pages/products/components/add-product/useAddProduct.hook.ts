@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CategoryApi } from "../../../../service/apis/category/category";
 import { ModelApi } from "../../../../service/apis/models/model";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { ProductApi } from "../../../../service/apis/product/Product";
 import { toast } from "react-toastify";
@@ -29,6 +29,29 @@ const useAddProduct = (product?: IProduct) => {
     enabled: !!folderId,
   });
 
+  const updateProduct = useMutation({
+    mutationFn: ({ id, data }: { id: string; data: IAddProductModal }) => {
+      delete data.folder;
+      const body: IProductApiBody = {
+        ...data,
+        category: data.category.value,
+        file: data.file.value,
+        recipes: data.recipes.map((recipe) => recipe.value),
+        isRecommended: data.isRecommended.value as boolean,
+        specialty: data.specialty.value,
+        foodType: data.foodType.value,
+        youtubeEmbedLink: data.youtubeEmbedLink,
+      };
+      return ProductApi.updateProduct(id, body);
+    },
+    onSuccess: () => {
+      toast.success("Product updated successfully");
+    },
+    onError: (error: any) => {
+      toast.error(error?.message ?? "Something went wrong");
+    },
+  });
+
   useEffect(() => {
     if (product) {
       setPrefillData({
@@ -38,7 +61,7 @@ const useAddProduct = (product?: IProduct) => {
           label: product.category?.name,
           value: product.category?._id,
         },
-        image: import.meta.env.VITE_FILE_URL + product.image,
+        image: product.image,
         actualPrice: product.actual_price,
         offerPrice: product.offer_price,
         isRecommended: {
@@ -65,7 +88,7 @@ const useAddProduct = (product?: IProduct) => {
           label: recipe,
           value: recipe,
         })),
-        youtubeEmbedLink: "",
+        youtubeEmbedLink: product?.youtube_url,
       });
     }
   }, [product]);
@@ -105,6 +128,7 @@ const useAddProduct = (product?: IProduct) => {
     setFolderId,
     onAddProductSubmit,
     prefillData,
+    updateProduct,
   };
 };
 

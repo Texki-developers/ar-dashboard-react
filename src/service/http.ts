@@ -23,11 +23,16 @@ class Http {
     });
   }
 
-  static async formData<T>(url: string, data: any) {
+  static async formData<T>(url: string, data: any, method: "POST" | "PUT" = "POST") {
     const formData = new FormData();
     Object.entries(data).forEach(([key, value]: any) => {
       formData.append(key, value);
     });
+    if (method === "PUT") {
+      return api.put<T>(url, formData, {
+        headers: { ...this.getHeaders(), "Content-Type": "multipart/form-data" },
+      });
+    }
     return api.post<T>(url, formData, {
       headers: { ...this.getHeaders(), "Content-Type": "multipart/form-data" },
     });

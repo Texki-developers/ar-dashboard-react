@@ -18,6 +18,7 @@ const ProductDetails = () => {
         <div>
             <div className="grid gap-4 grid-rows-[auto_1fr] h-full">
                 <TableHeader
+                    showBackButton
                     headerConfig={{ title: product?.name ?? "" }}
                     actions={
                         <div className="flex gap-2">

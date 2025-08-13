@@ -1,6 +1,7 @@
 import type { IProduct } from "../../service/apis/product/product.type";
 import ImageViewRender from "./components/ImageViewRender";
 import ThreeDModelViewerRender from "./components/threed-model-viewer-render";
+import YtVideoViewerRender from "./components/youtubeViewerRender";
 
 export const productDetailsConfig: IProductDetailsConfig[] = [
   {
@@ -53,7 +54,8 @@ export const productDetailsConfig: IProductDetailsConfig[] = [
   },
   {
     label: "Youtube Embed Link",
-    sourceKey: "youtubeEmbedLink",
+    sourceKey: "youtube_url",
+    render: (value: IProduct) => (value.youtube_url ? <YtVideoViewerRender value={value.youtube_url} /> : "Nil"),
   },
 ];
 

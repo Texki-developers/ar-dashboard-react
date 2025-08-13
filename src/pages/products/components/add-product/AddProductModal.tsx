@@ -10,25 +10,48 @@ import Button from "../../../../components/button/Button";
 import useAddProduct from "./useAddProduct.hook";
 import type { IProduct } from "../../../../service/apis/product/product.type";
 import { useEffect } from "react";
+import { queryClient } from "../../../../main";
 
 const AddProductModal = ({ onClose, show, isEdit, product }: { onClose: () => void; show: boolean; isEdit?: boolean; product?: IProduct }) => {
     const {
         control,
         handleSubmit,
         reset,
+        watch,
         formState: { errors },
     } = useForm<IAddProductModal>();
-    const { categories, categoriesLoading, setFolderId, folders, foldersLoading, files, filesLoading, onAddProductSubmit, prefillData } = useAddProduct(product);
+    const {
+        categories,
+        categoriesLoading,
+        setFolderId,
+        folders,
+        foldersLoading,
+        files,
+        filesLoading,
+        onAddProductSubmit,
+        prefillData,
+        updateProduct,
+    } = useAddProduct(product);
     useEffect(() => {
         if (prefillData && isEdit) {
             reset(prefillData);
         }
-    }, [prefillData, reset, isEdit]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [prefillData, isEdit]);
+
+    useEffect(() => {
+        if (updateProduct?.isSuccess && product?._id) {
+            queryClient.invalidateQueries({ queryKey: ["product", product?._id] });
+            onClose();
+            reset();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [updateProduct?.isSuccess, product?._id]);
 
     const onSubmit = (data: IAddProductModal) => {
         console.log({ data });
-        if (isEdit) {
-            console.log(product);
+        if (isEdit && product?._id && data) {
+            updateProduct.mutate({ id: product._id, data });
         } else {
             onAddProductSubmit(data, onClose, reset);
         }
@@ -73,9 +96,10 @@ const AddProductModal = ({ onClose, show, isEdit, product }: { onClose: () => vo
                     <Reviews
                         control={control}
                         errors={errors}
+                        watch={watch}
                     />
                     <div className="flex justify-end">
-                        <Button onClick={handleSubmit(onSubmit)}>{isEdit ? "Update" : "Submit"}</Button>
+                        <Button onClick={handleSubmit(onSubmit)}>{updateProduct?.isPending ? "Updating..." : isEdit ? "Update" : "Submit"}</Button>
                     </div>
                 </div>
             </div>
@@ -112,7 +136,7 @@ export interface IAddProductModal {
         label: string;
         value: string;
     };
-    folder: {
+    folder?: {
         label: string;
         value: string;
     };
@@ -120,5 +144,5 @@ export interface IAddProductModal {
         label: string;
         value: string;
     }[];
-    youtubeEmbedLink: string;
+    youtubeEmbedLink?: string;
 }

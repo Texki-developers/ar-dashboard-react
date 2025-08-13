@@ -8,7 +8,7 @@ const ImageViewRender = ({ value }: { value: string }) => {
             <p
                 className="text-blue-500 inline cursor-pointer underline"
                 onClick={() => setShow(true)}>
-                View
+                View Image
             </p>
             {show && (
                 <ImageViewer

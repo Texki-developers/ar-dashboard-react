@@ -1,7 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const ImageUpload = ({ label = "Image", onChange, error }: { label: string; onChange: (e: File | undefined) => void; error?: string }) => {
+const ImageUpload = ({
+    label = "Image",
+    onChange,
+    error,
+    value,
+}: {
+    label: string;
+    onChange: (e: File | undefined) => void;
+    error?: string;
+    value?: File | string;
+}) => {
     const [image, setImage] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (typeof value === "string") {
+            setImage(import.meta.env.VITE_FILE_URL + value);
+        }
+    }, [value]);
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];

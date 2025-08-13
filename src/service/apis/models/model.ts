@@ -14,4 +14,9 @@ export class ModelApi extends Http {
     const response = await Http.get<ApiResponse<IFileResponseData[]>>(`/file/items?folderId=${id}`);
     return response.data;
   };
+
+  static deleteFolder = async (id: string | number) => {
+    const response = await Http.delete<ApiResponse<IModelsApiResponse[]>>(`folder/delete?folderId=${id}`);
+    return response.data;
+  };
 }
