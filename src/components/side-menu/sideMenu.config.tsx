@@ -1,4 +1,4 @@
-import { DashboardIcon, ModelsIcon, ProductsIcon } from "./icons/icons";
+import { DashboardIcon, ModelsIcon, ProductsIcon, QrCodesIcon } from "./icons/icons";
 
 export const sideMenuConfig = [
     {
@@ -15,5 +15,10 @@ export const sideMenuConfig = [
         name: "Models",
         icon: ModelsIcon,
         path: "models",
+    },
+    {
+        name: "Qr Codes",
+        icon: QrCodesIcon,
+        path: "qr-codes",
     },
 ];
