@@ -17,9 +17,11 @@ const Reviews = ({
     const [embedLink, setEmbedLink] = useState<string>("");
     const youtubeEmbedLink = watch("youtubeEmbedLink");
     useEffect(() => {
-        const id = extractYouTubeId(youtubeEmbedLink);
-        if (id) {
-            setEmbedLink(`https://www.youtube.com/embed/${id}`);
+        if (youtubeEmbedLink) {
+            const id = extractYouTubeId(youtubeEmbedLink);
+            if (id) {
+                setEmbedLink(`https://www.youtube.com/embed/${id}`);
+            }
         }
     }, [youtubeEmbedLink]);
     return (
