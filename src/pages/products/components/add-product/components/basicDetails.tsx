@@ -1,9 +1,9 @@
 import { Controller, type Control, type FieldErrors } from "react-hook-form";
 import Input from "../../../../../components/form-components/Input";
 import ImageUpload from "../../../../../components/form-components/ImageUpload";
-import type { ICategoryList } from "../../../../../service/apis/category/category.type";
 import CustomCreatableSelect from "../../../../../components/form-components/CreatableSelect";
 import type { IAddProductModal } from "../AddProductModal";
+import type { ICategory } from "../../../../../service/apis/category/category.type";
 
 const BasicDetails = ({
     control,
@@ -13,7 +13,7 @@ const BasicDetails = ({
 }: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     control: Control<IAddProductModal, any, IAddProductModal>;
-    categories: ICategoryList["data"] | undefined;
+    categories: ICategory[] | undefined;
     categoriesLoading: boolean;
     errors: FieldErrors<IAddProductModal>
 
@@ -44,7 +44,7 @@ const BasicDetails = ({
                             onCreateOption={(value) => {
                                 field?.onChange(value);
                             }}
-                            options={categories?.map((category) => ({
+                            options={categories?.map((category: { name: string, _id: string }) => ({
                                 label: category.name,
                                 value: category._id,
                             }))}
