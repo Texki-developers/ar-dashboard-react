@@ -30,7 +30,7 @@ const useAddProduct = (product?: IProduct) => {
   });
 
   const updateProduct = useMutation({
-    mutationFn: ({ id, data }: { id: string; data: IAddProductModal }) => {
+    mutationFn: async ({ id, data }: { id: string; data: IAddProductModal }) => {
       delete data.folder;
       const body: IProductApiBody = {
         ...data,

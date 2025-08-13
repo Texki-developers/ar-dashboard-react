@@ -17,8 +17,8 @@ class Http {
     });
   }
 
-  static async post<T>(url: string, data: T) {
-    return api.post<T>(url, data, {
+  static async post<T, U>(url: string, data: T) {
+    return api.post<U>(url, data, {
       headers: this.getHeaders(),
     });
   }

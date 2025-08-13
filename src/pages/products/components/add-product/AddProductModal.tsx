@@ -11,6 +11,7 @@ import useAddProduct from "./useAddProduct.hook";
 import type { IProduct } from "../../../../service/apis/product/product.type";
 import { useEffect } from "react";
 import { queryClient } from "../../../../main";
+import { CategoryApi } from "../../../../service/apis/category/category";
 
 const AddProductModal = ({ onClose, show, isEdit, product }: { onClose: () => void; show: boolean; isEdit?: boolean; product?: IProduct }) => {
     const {
@@ -20,18 +21,9 @@ const AddProductModal = ({ onClose, show, isEdit, product }: { onClose: () => vo
         watch,
         formState: { errors },
     } = useForm<IAddProductModal>();
-    const {
-        categories,
-        categoriesLoading,
-        setFolderId,
-        folders,
-        foldersLoading,
-        files,
-        filesLoading,
-        onAddProductSubmit,
-        prefillData,
-        updateProduct,
-    } = useAddProduct(product);
+    const { categories, categoriesLoading, setFolderId, folders, foldersLoading, files, filesLoading, onAddProductSubmit, prefillData, updateProduct } =
+        useAddProduct(product);
+
     useEffect(() => {
         if (prefillData && isEdit) {
             reset(prefillData);
@@ -48,8 +40,12 @@ const AddProductModal = ({ onClose, show, isEdit, product }: { onClose: () => vo
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [updateProduct?.isSuccess, product?._id]);
 
-    const onSubmit = (data: IAddProductModal) => {
-        console.log({ data });
+    const onSubmit = async (data: IAddProductModal) => {
+        if (data?.category?.isCreated) {
+            const categoryResponse = await CategoryApi.addCategory({ name: data.category.label, priority: 0 });
+            data.category.value = categoryResponse?.data?._id;
+            console.log({ data });
+        }
         if (isEdit && product?._id && data) {
             updateProduct.mutate({ id: product._id, data });
         } else {
