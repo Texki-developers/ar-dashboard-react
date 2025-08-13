@@ -43,8 +43,18 @@ const Table = ({ columns, data, onRowClick }: ITableProps) => {
                         );
                     })}
                 </tbody>
+                <tfoot>
+                    {data?.length === 0 && (
+                        <tr>
+                            <td
+                                colSpan={columns.length}
+                                className="text-center pt-4">
+                                No data available
+                            </td>
+                        </tr>
+                    )}
+                </tfoot>
             </table>
-            {data?.length === 0 && <div className="w-full h-full flex items-center justify-center">No data available</div>}
         </Box>
     );
 };
