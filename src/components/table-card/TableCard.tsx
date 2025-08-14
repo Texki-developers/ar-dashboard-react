@@ -5,16 +5,17 @@ import { useRef } from "react";
 const TableCard = ({ tableNumber, vendorId }: { tableNumber: string; vendorId: string }) => {
     const FrontendURL = import.meta.env.VITE_FRONTEND_URL;
     const qrCodeRef = useRef<QRCode | null>(null);
+
     return (
         <div className="w-full justify-center flex rounded-[20px] min-h-[300px] border p-4 overflow-hidden border-[#00000034] relative">
             <QRCode
                 qrStyle="dots"
                 eyeRadius={20}
                 size={300}
-                value={`${FrontendURL}?tableNumber=${tableNumber}&vendorId=${vendorId}`}
+                value={`${FrontendURL}${vendorId}`}
                 ref={qrCodeRef}
                 // logoImage="https://img.freepik.com/premium-vector/coffee-cream-logo_608547-94.jpg"
-                // logoHeight={100}
+                // logoHeight={100} 
                 // logoWidth={100}
                 removeQrCodeBehindLogo
             />
