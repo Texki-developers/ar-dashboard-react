@@ -11,7 +11,7 @@ const TableCard = ({ tableNumber, vendorId }: { tableNumber: string; vendorId: s
             <QRCode
                 qrStyle="dots"
                 eyeRadius={20}
-                size={300}
+                size={280}
                 value={`${FrontendURL}${vendorId}`}
                 ref={qrCodeRef}
                 // logoImage="https://img.freepik.com/premium-vector/coffee-cream-logo_608547-94.jpg"

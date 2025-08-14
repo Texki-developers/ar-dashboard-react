@@ -15,7 +15,7 @@ const ModalWrapper = ({ show, onClose, children, className }: ModalWrapperProps)
         ? createPortal(
             <div
                 onClick={onCloseHandler}
-                className="fixed  top-0 z-50 grid place-items-center left-0 w-full h-full bg-[#0000007e]">
+                className="fixed  top-0 z-50 grid place-items-center left-0 w-full h-full bg-[#000000a7] backdrop-blur-[5px]">
                 <div
                     onClick={(e) => e.stopPropagation()}
                     className={`bg-white max-h-[calc(100vh-100px)] overflow-auto rounded-md py-4 px-6 ${className}`}>

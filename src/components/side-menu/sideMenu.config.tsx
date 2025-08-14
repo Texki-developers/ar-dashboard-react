@@ -1,8 +1,9 @@
-import { TableIcon } from "../../assets/svg-icons";
+import { SettingsIcon, TableIcon } from "../../assets/svg-icons";
 import { RouteURLs } from "../../router/routeUrls";
 import { DashboardIcon, ModelsIcon, ProductsIcon } from "./icons/icons";
+import type { IMenuItem } from "./components/MenuItem";
 
-export const sideMenuConfig = [
+export const sideMenuConfig: IMenuItem[] = [
     {
         name: "Dashboard",
         icon: DashboardIcon,
@@ -22,5 +23,10 @@ export const sideMenuConfig = [
         name: "Tables",
         icon: TableIcon,
         path: RouteURLs.Tables?.replace('/', ''),
+    },
+    {
+        name: "Settings",
+        icon: SettingsIcon,
+        path: RouteURLs.Settings?.replace('/', ''),
     },
 ];

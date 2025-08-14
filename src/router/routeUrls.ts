@@ -4,4 +4,5 @@ export enum RouteURLs {
   Products = "/products",
   Models = "/models",
   Tables = "/tables",
+  Settings = "/settings",
 }

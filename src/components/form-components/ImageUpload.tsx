@@ -5,11 +5,13 @@ const ImageUpload = ({
     onChange,
     error,
     value,
+    width,
 }: {
     label: string;
     onChange: (e: File | undefined) => void;
     error?: string;
     value?: File | string;
+    width?: string;
 }) => {
     const [image, setImage] = useState<string | null>(null);
 
@@ -37,7 +39,7 @@ const ImageUpload = ({
                 className="block text-[16px] mb-2 text-[#333]">
                 {label}
             </label>
-            <div className=" relative border border-[#333] w-[250px] h-[80px] rounded-md flex justify-center items-center">
+            <div className={`relative border border-[#333] w-[${width ?? "250px"}] h-[80px] rounded-md flex justify-center items-center`}>
                 {image ? (
                     <>
                         <img

@@ -1,3 +1,4 @@
+import MenuItem from "./components/MenuItem";
 import Profile from "./components/profile";
 import { sideMenuConfig } from "./sideMenu.config";
 import { useCallback } from "react";
@@ -7,11 +8,14 @@ const SideMenu = () => {
     const navigate = useNavigate();
     const selectedMenu = useLocation().pathname;
 
-    const isActive = useCallback((path: string) => {
-        const firstPath = selectedMenu.split("/")[1];
-        return firstPath === path;
-    }, [selectedMenu]);
-
+    const isActive = useCallback(
+        (path: string) => {
+            const firstPath = selectedMenu.split("/")[1];
+            return firstPath === path;
+        },
+        [selectedMenu]
+    );
+    const onClick = useCallback((path: string) => navigate(path), [navigate]);
     return (
         <div className="bg-white w-[250px] h-full px-4 py-6">
             <div className="flex gap-2 items-center">
@@ -27,15 +31,12 @@ const SideMenu = () => {
                 <div className="h-full overflow-auto">
                     <div className="grid gap-2">
                         {sideMenuConfig.map((item) => (
-                            <div
-                                onClick={() => {
-                                    navigate(item.path);
-                                }}
-                                className={`flex items-center gap-2 ${isActive(item.path) ? "primary-gradient text-white" : "text-grayText"
-                                    } rounded-md p-2 cursor-pointer text-sm `}>
-                                {item.icon({ color: isActive(item.path) ? "white" : "#9197B3" })}
-                                <h1>{item.name}</h1>
-                            </div>
+                            <MenuItem
+                                key={item.name}
+                                item={item}
+                                isActive={isActive}
+                                onClick={onClick}
+                            />
                         ))}
                     </div>
                 </div>
