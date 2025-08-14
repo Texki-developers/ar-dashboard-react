@@ -28,7 +28,7 @@ export interface IProduct {
     _id: string;
     name: string;
   };
-  file_id: {
+  file_id?: {
     _id: string;
     file_name: string;
     folder_id: {

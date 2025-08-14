@@ -77,12 +77,12 @@ const useAddProduct = (product?: IProduct) => {
           value: product.speciality,
         },
         file: {
-          label: product.file_id.file_name,
-          value: product.file_id._id,
+          label: product?.file_id?.file_name ?? "",
+          value: product?.file_id?._id ?? "",
         },
         folder: {
-          label: product.file_id.folder_id.folder_name,
-          value: product.file_id.folder_id._id,
+          label: product?.file_id?.folder_id.folder_name ?? "",
+          value: product?.file_id?.folder_id._id ?? "",
         },
         recipes: product.recipes.map((recipe) => ({
           label: recipe,

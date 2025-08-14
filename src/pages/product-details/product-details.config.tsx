@@ -20,42 +20,42 @@ export const productDetailsConfig: IProductDetailsConfig[] = [
   {
     label: "Image",
     sourceKey: "image",
-    render: (value: IProduct) => <ImageViewRender value={value.image} />,
+    render: (value: IProduct) => <ImageViewRender value={value?.image} />,
   },
   {
     label: "Price",
     sourceKey: "actual_price",
-    render: (value: IProduct) => "INR " + value.actual_price?.toFixed(2),
+    render: (value: IProduct) => "INR " + value?.actual_price?.toFixed(2),
   },
   {
     label: "Offer Price",
     sourceKey: "offer_price",
-    render: (value: IProduct) => "INR " + value.offer_price?.toFixed(2),
+    render: (value: IProduct) => "INR " + value?.offer_price?.toFixed(2),
   },
   {
     label: "Is Recommended",
     sourceKey: "isRecommended.label",
-    render: (value: IProduct) => (value.is_recommended === true ? "Yes" : "No"),
+    render: (value: IProduct) => (value?.is_recommended === true ? "Yes" : "No"),
   },
   {
     label: "Food Type",
     sourceKey: "food_type",
-    render: (value: IProduct) => value.food_type,
+    render: (value: IProduct) => value?.food_type,
   },
   {
     label: "Specialty",
     sourceKey: "speciality",
   },
-  { label: "3D Model", sourceKey: "three_glb", render: (value: IProduct) => <ThreeDModelViewerRender value={value.three_glb} /> },
+  { label: "3D Model", sourceKey: "three_glb", render: (value: IProduct) => <ThreeDModelViewerRender value={value?.three_glb} /> },
   {
     label: "Recipes",
     sourceKey: "recipes",
-    render: (value: IProduct) => value.recipes.join(", "),
+    render: (value: IProduct) => value?.recipes?.join(", "),
   },
   {
     label: "Youtube Embed Link",
     sourceKey: "youtube_url",
-    render: (value: IProduct) => (value.youtube_url ? <YtVideoViewerRender value={value.youtube_url} /> : "Nil"),
+    render: (value: IProduct) => (value?.youtube_url ? <YtVideoViewerRender value={value?.youtube_url} /> : "Nil"),
   },
 ];
 
