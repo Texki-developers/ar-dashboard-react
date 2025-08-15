@@ -8,9 +8,11 @@ import Empty from "../../components/empty/Empty";
 import { useState } from "react";
 import ConfirmPopup from "../../components/confirm-popup/ConfirmPopup";
 import ModelViewerRender from "../../components/three-model-viewer/ModelViewerRender";
+import type { IFileResponseData } from "./file.type";
 
 const FileScreen = () => {
     const [showModal, setShowModal] = useState(false);
+    const [selectedFile, setSelectedFile] = useState<IFileResponseData | null>(null);
     const [showConfirmPopup, setShowConfirmPopup] = useState(false);
     const { files, filesLoading, deleteFile } = useFiles();
     const [deleteFileId, setDeleteFileId] = useState<string | null>(null);
@@ -38,19 +40,22 @@ const FileScreen = () => {
                                 key={`file-${file._id}`}
                                 name={file.file_name}
                                 model={file.glb_file}
-                                onClick={() => setShowModal(true)}
+                                onClick={() => {
+                                    setSelectedFile(file);
+                                    setShowModal(true);
+                                }}
                                 onFileRemove={() => onFileRemove(file._id)}
                             />
                         ))}
                     </div>
                 )}
             </Box>
-            {files?.[0]?.glb_file && (
+            {selectedFile && (
                 <ModelViewerRender
                     show={showModal}
                     onClose={() => setShowModal(false)}
-                    name={files?.[0]?.file_name}
-                    src={files?.[0]?.glb_file}
+                    name={selectedFile?.file_name}
+                    src={selectedFile?.glb_file}
                 />
             )}
             <ConfirmPopup
