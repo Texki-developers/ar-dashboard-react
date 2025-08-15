@@ -65,7 +65,7 @@ const ProductDetails = () => {
                     deleteProduct();
                 }}
             />
-            {product && (
+            {product && showModal && (
                 <AddProductModal
                     key={product._id}
                     show={showModal}

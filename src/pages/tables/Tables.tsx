@@ -36,10 +36,12 @@ const Tables = () => {
           </div>
         )}
       </Box>
-      <AddTable
-        show={showAddTable}
-        onClose={() => setShowAddTable(false)}
-      />
+      {showAddTable && (
+        <AddTable
+          show={showAddTable}
+          onClose={() => setShowAddTable(false)}
+        />
+      )}
     </div>
   );
 };

@@ -36,10 +36,12 @@ const Products = () => {
                         />
                     )
                 )}
-                <AddProductModal
-                    show={showModal}
-                    onClose={() => setShowModal(false)}
-                />
+                {showModal && (
+                    <AddProductModal
+                        show={showModal}
+                        onClose={() => setShowModal(false)}
+                    />
+                )}
             </div>
         </div>
     );

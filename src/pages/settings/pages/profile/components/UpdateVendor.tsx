@@ -6,17 +6,35 @@ import ImageUpload from "../../../../../components/form-components/ImageUpload";
 import Button from "../../../../../components/button/Button";
 import { useEffect } from "react";
 import type { IProfileSettings } from "../../../../../service/apis/settings/Settings.type";
+import useUpdateVendor from "./useUpdateVendor.hook";
 
-const UpdateVendor = ({ show, onClose, vendor }: { show: boolean; onClose: () => void; vendor: IProfileSettings }) => {
+const UpdateVendor = ({
+    show,
+    onClose,
+    vendor,
+    setData,
+}: {
+    show: boolean;
+    onClose: () => void;
+    vendor: IProfileSettings;
+    setData: (data: IProfileSettings) => void;
+}) => {
     const {
         control,
         handleSubmit,
         reset,
         formState: { errors },
     } = useForm<IUpdateVendor>();
+    const { updateVendor } = useUpdateVendor(vendor?._id, setData);
     const onSubmit = (data: IUpdateVendor) => {
-        console.log(data);
+        updateVendor.mutate(data);
     };
+    useEffect(() => {
+        if (updateVendor.isSuccess) {
+            onClose();
+            reset();
+        }
+    }, [updateVendor.isSuccess, onClose, reset]);
 
     useEffect(() => {
         if (vendor) {
@@ -98,7 +116,11 @@ const UpdateVendor = ({ show, onClose, vendor }: { show: boolean; onClose: () =>
                         )}
                     />
                     <div className="flex justify-end mt-2">
-                        <Button onClick={handleSubmit(onSubmit)}>Submit</Button>
+                        <Button
+                            disabled={updateVendor.isPending}
+                            onClick={handleSubmit(onSubmit)}>
+                            {updateVendor.isPending ? "Updating..." : "Update"}
+                        </Button>
                     </div>
                 </div>
             </div>
