@@ -9,7 +9,7 @@ const TableCard = ({ tableNumber, vendorId }: { tableNumber: string; vendorId: s
     return (
         <div className="w-full justify-center flex rounded-[20px] min-h-[300px] border p-4 overflow-hidden border-[#00000034] relative">
             <QRCode
-                qrStyle="dots"
+                qrStyle="squares"
                 eyeRadius={20}
                 size={280}
                 value={`${FrontendURL}${vendorId}`}
